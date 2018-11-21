@@ -1,0 +1,58 @@
+#   Copyright 2018 NephoSolutions SPRL, Sebastian Trebitz
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+driver:
+  name: terraform
+  root_module_directory: test/integration
+  variables:
+    project_id: "neutral-tick-e5a65ef7"
+
+provisioner:
+  name: terraform
+
+verifier:
+  name: terraform
+  systems:
+    - name: basic
+      attrs:
+        - test/integration/attributes.yml
+      attrs_outputs:
+        service_account_email: email
+        service_account_name: name
+        service_account_display_name: display_name
+      backend: gcp
+      controls:
+        - service_account
+        - service_account_key
+
+platforms:
+  - name: no-key
+    driver:
+      variables:
+        pgp_key: ""
+    
+  - name: default-key
+    driver:
+      variables:
+        create_service_account_key_pair: "true"
+        pgp_key: ""
+    
+  - name: encrypted-key
+    driver:
+      variables:
+        create_service_account_key_pair: "true"
+        pgp_key: "keybase:strebitz"
+
+suites:
+  - name: service-account
