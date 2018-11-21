@@ -17,7 +17,7 @@ variable "account_id" {
 }
 
 variable "create_service_account_key_pair" {
-  default = "false"
+  default = false
   description = "Whether to create a key_pair for this service account."
 }
 
