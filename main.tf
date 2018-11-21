@@ -18,8 +18,19 @@ resource "google_service_account" "default" {
   project      = "${var.project_id}"
 }
 
+locals {
+  default_service_account_private_key = "${var.create_service_account_key_pair && var.pgp_key == "" ? 1 : 0}"
+  encrypted_service_account_private_key = "${var.create_service_account_key_pair && var.pgp_key != "" ? 1 : 0}"
+}
+
 resource "google_service_account_key" "default" {
-  count = "${var.create_service_account_key_pair}"
+  count = "${local.default_service_account_private_key}"
+
+  service_account_id  = "${google_service_account.default.id}"
+}
+
+resource "google_service_account_key" "encrypted" {
+  count = "${local.encrypted_service_account_private_key}"
 
   service_account_id  = "${google_service_account.default.id}"
   pgp_key             = "${var.pgp_key}"
