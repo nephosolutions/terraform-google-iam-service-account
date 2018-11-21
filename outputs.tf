@@ -13,26 +13,26 @@
 #   limitations under the License.
 
 output "name" {
-  value       = ["${join(" ",google_service_account.default.*.name)}"]
-  description = "The name used for this key pair."
+  value       = "${join(" ",google_service_account.default.*.name)}"
+  description = "The name used for this service account."
 }
 
 output "email" {
-  value       = ["${join(" ",google_service_account.default.*.email)}"]
-  description = "The name used for this key pair."
+  value       = "${join(" ",google_service_account.default.*.email)}"
+  description = "The email address used for this service account."
 }
 
 output "public_key" {
-  value       = ["${join(" ",google_service_account_key.default.*.public_key)}"]
+  value       = "${join(" ",google_service_account_key.default.*.public_key)}"
   description = "The public key, base64 encoded."
 }
 
 output "private_key" {
-  value       = ["${join(" ",google_service_account_key.default.*.private_key_encrypted)}"]
+  value       = "${join(" ",concat(google_service_account_key.default.*.private_key,google_service_account_key.encrypted.*.private_key_encrypted))}"
   description = "The private key material, base 64 encoded and encrypted with the given pgp_key."
 }
 
 output "private_key_fingerprint" {
-  value       = ["${join(" ",google_service_account_key.default.*.private_key_fingerprint)}"]
+  value       = "${join(" ",google_service_account_key.encrypted.*.private_key_fingerprint)}"
   description = " The MD5 public key fingerprint for the encrypted private key."
 }
