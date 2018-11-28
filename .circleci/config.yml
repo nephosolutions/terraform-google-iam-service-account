@@ -32,4 +32,5 @@ jobs:
       - run:
           name: Run inegration tests with Test-Kitchen-Terraform and Inspec
           command: |
-            KITCHENS=$(bundle exec kitchen list -b -l error | circleci tests split) bundle exec kitchen test ${KITCHENS}
+            KITCHENS="$(bundle exec kitchen list -b -l error | circleci tests split)"
+            bundle exec kitchen test ${KITCHENS}
