@@ -22,6 +22,11 @@ output "email" {
   description = "The email address used for this service account."
 }
 
+output "unique_id" {
+  value       = "${join(" ",google_service_account.default.*.unique_id)}"
+  description = "The unique ID of this service account."
+}
+
 output "public_key" {
   value       = "${join(" ",google_service_account_key.default.*.public_key)}"
   description = "The public key, base64 encoded."
@@ -30,6 +35,11 @@ output "public_key" {
 output "private_key" {
   value       = "${join(" ",concat(google_service_account_key.default.*.private_key,google_service_account_key.encrypted.*.private_key_encrypted))}"
   description = "The private key material, base 64 encoded and encrypted with the given pgp_key."
+}
+
+output "private_key_id" {
+  value       = "${join(" ",concat(google_service_account_key.default.*.id,google_service_account_key.encrypted.*.id))}"
+  description = "The private key ID."
 }
 
 output "private_key_fingerprint" {
