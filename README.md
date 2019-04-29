@@ -35,8 +35,10 @@ module "service_account" {
 
 | Name | Description |
 |------|-------------|
-| email | The email address used for this key pair. |
-| name | The name used for this key pair. |
+| email | The email address used for this service account. |
+| name | The name used for this service account. |
 | private\_key | The private key material, base 64 encoded and encrypted with the given pgp_key. |
 | private\_key\_fingerprint | The MD5 public key fingerprint for the encrypted private key. |
+| private\_key\_id | The private key ID. |
 | public\_key | The public key, base64 encoded. |
+| unique\_id | The unique ID of this service account. |
