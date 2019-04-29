@@ -9,7 +9,7 @@ The module enforces the encryption of the private_key material.
 ```hcl
 module "service_account" {
   source  = "nephosolutions/iam-service-account/google"
-  version = "1.0.0"
+  version = "1.1.0"
 
   account_id    = "application"
   display_name  = "Application description"
