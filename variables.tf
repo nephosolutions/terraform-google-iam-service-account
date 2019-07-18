@@ -17,7 +17,7 @@ variable "account_id" {
 }
 
 variable "create_service_account_key_pair" {
-  default = false
+  default     = false
   description = "Whether to create a key_pair for this service account."
 }
 
@@ -32,3 +32,4 @@ variable "pgp_key" {
 variable "project_id" {
   description = "The ID of the GCP project that the service account will be created in."
 }
+

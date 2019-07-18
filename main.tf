@@ -13,25 +13,26 @@
 #   limitations under the License.
 
 resource "google_service_account" "default" {
-  account_id   = "${var.account_id}"
-  display_name = "${var.display_name}"
-  project      = "${var.project_id}"
+  account_id   = var.account_id
+  display_name = var.display_name
+  project      = var.project_id
 }
 
 locals {
-  default_service_account_private_key = "${var.create_service_account_key_pair && var.pgp_key == "" ? 1 : 0}"
-  encrypted_service_account_private_key = "${var.create_service_account_key_pair && var.pgp_key != "" ? 1 : 0}"
+  default_service_account_private_key   = var.create_service_account_key_pair && var.pgp_key == "" ? 1 : 0
+  encrypted_service_account_private_key = var.create_service_account_key_pair && var.pgp_key != "" ? 1 : 0
 }
 
 resource "google_service_account_key" "default" {
-  count = "${local.default_service_account_private_key}"
+  count = local.default_service_account_private_key
 
-  service_account_id  = "${google_service_account.default.id}"
+  service_account_id = google_service_account.default.id
 }
 
 resource "google_service_account_key" "encrypted" {
-  count = "${local.encrypted_service_account_private_key}"
+  count = local.encrypted_service_account_private_key
 
-  service_account_id  = "${google_service_account.default.id}"
-  pgp_key             = "${var.pgp_key}"
+  service_account_id = google_service_account.default.id
+  pgp_key            = var.pgp_key
 }
+

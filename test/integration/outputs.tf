@@ -13,31 +13,32 @@
 #   limitations under the License.
 
 output "name" {
-  value       = "${module.service_account.name}"
+  value       = module.service_account.name
   description = "The name used for this service account."
 }
 
 output "email" {
-  value       = "${module.service_account.email}"
+  value       = module.service_account.email
   description = "The email address used for this service account."
 }
 
 output "display_name" {
-  value       = "${random_id.service_account.hex}"
+  value       = random_id.service_account.hex
   description = "The display name of this service account."
 }
 
 output "public_key" {
-  value       = "${module.service_account.public_key}"
+  value       = module.service_account.public_key
   description = "The public key, base64 encoded."
 }
 
 output "private_key" {
-  value       = "${module.service_account.private_key}"
+  value       = module.service_account.private_key
   description = "The private key material, base 64 encoded and encrypted with the given pgp_key."
 }
 
 output "private_key_fingerprint" {
-  value       = "${module.service_account.private_key_fingerprint}"
+  value       = module.service_account.private_key_fingerprint
   description = " The MD5 public key fingerprint for the encrypted private key."
 }
+
