@@ -31,7 +31,7 @@ verifier:
         service_account_email: email
         service_account_name: name
         service_account_display_name: display_name
-      backend: gcp
+      backend: local
       controls:
         - service_account
         - service_account_key

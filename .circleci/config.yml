@@ -16,7 +16,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: nephosolutions/terraform:0.12.4
+      - image: nephosolutions/terraform:0.12.4-2
     parallelism: 2
     steps:
       - checkout
