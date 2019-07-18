@@ -13,14 +13,15 @@
 #   limitations under the License.
 
 provider "google" {
-  version = "= 1.19"
+  version = "~> 2.10"
 }
 
 provider "random" {
-  version = "~> 1.3"
+  version = "~> 2.0"
 }
 
-resource "random_pet" "service_account" {}
+resource "random_pet" "service_account" {
+}
 
 resource "random_id" "service_account" {
   byte_length = 4
@@ -29,10 +30,11 @@ resource "random_id" "service_account" {
 
 module "service_account" {
   source = "../../"
-  
-  account_id                      = "${lower(random_id.service_account.hex)}"
-  create_service_account_key_pair = "${var.create_service_account_key_pair}"
-  display_name                    = "${random_id.service_account.hex}"
-  pgp_key                         = "${var.pgp_key}"
-  project_id                      = "${var.project_id}"
+
+  account_id                      = lower(random_id.service_account.hex)
+  create_service_account_key_pair = var.create_service_account_key_pair
+  display_name                    = random_id.service_account.hex
+  pgp_key                         = var.pgp_key
+  project_id                      = var.project_id
 }
+
