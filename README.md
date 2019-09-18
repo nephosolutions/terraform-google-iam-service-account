@@ -1,44 +1,33 @@
 # Google Cloud Platform IAM service account Terraform module
 
 This terraform module provisions a Google Cloud Platform IAM service account.
-A service account private_key pair can be provisioned, optionally.
-The module enforces the encryption of the private_key material.
 
 ## Usage
 
 ```hcl
 module "service_account" {
   source  = "nephosolutions/iam-service-account/google"
-  version = "1.1.0"
+  version = "3.0.0"
 
-  account_id    = "application"
   display_name  = "Application description"
-  project_id    = "${var.gcp_project_id}"
-
-  create_service_account_key_pair = true
-
-  pgp_key = "${var.pgp_key_material}"
+  project_id    = var.gcp_project_id
 }
 ```
 
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| account\_id | The service account ID. Changing this forces a new service account to be created. | string | - | yes |
-| create\_service\_account\_key\_pair | Whether to create a key_pair for this service account. | string | `false` | no |
-| display\_name | The display name for the service account. Can be updated without creating a new resource. | string | - | yes |
-| pgp\_key | A PGP key to encrypt the resulting private key material. Only used when creating or importing a new key pair. May either be a base64-encoded public key or a keybase:keybaseusername string for looking up in Vault. | string | - | yes |
-| project\_id | The ID of the GCP project that the service account will be created in. | string | - | yes |
+| display\_name | The display name for the service account. Can be updated without creating a new resource. | string | n/a | yes |
+| project\_id | The ID of the GCP project that the service account will be created in. Defaults to the provider project configuration, if left empty. | string | `""` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| email | The email address used for this service account. |
-| name | The name used for this service account. |
-| private\_key | The private key material, base 64 encoded and encrypted with the given pgp_key. |
-| private\_key\_fingerprint | The MD5 public key fingerprint for the encrypted private key. |
-| private\_key\_id | The private key ID. |
-| public\_key | The public key, base64 encoded. |
-| unique\_id | The unique ID of this service account. |
+| email | The e-mail address of the service account. This value should be referenced from any google_iam_policy data sources that would grant the service account privileges. |
+| name | The fully-qualified name of the service account. |
+| unique\_id | The unique id of the service account. |
+
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
