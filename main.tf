@@ -1,4 +1,4 @@
-# Copyright 2019 NephoSolutions SPRL, Sebastian Trebitz
+# Copyright 2020 NephoSolutions SRL, Sebastian Trebitz
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,16 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "random_pet" "prefix" {
+locals {
+  account_id = join("-", [random_pet.prefix.id, random_id.service_account.hex])
 }
 
 resource "random_id" "service_account" {
   byte_length = 4
-  prefix      = "${random_pet.prefix.id}-"
+}
+
+resource "random_pet" "prefix" {
 }
 
 resource "google_service_account" "managed" {
-  account_id   = lower(random_id.service_account.hex)
+  account_id   = var.account_id != "" ? var.account_id : local.account_id
+  description  = var.description != "" ? var.description : null
   display_name = var.display_name
   project      = var.project_id != "" ? var.project_id : null
 }
