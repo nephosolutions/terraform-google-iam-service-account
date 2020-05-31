@@ -12,25 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
----
-repos:
-- repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v2.5.0
-  hooks:
-  - id: end-of-file-fixer
-  - id: trailing-whitespace
-  - id: check-case-conflict
-  - id: check-merge-conflict
-- repo: https://github.com/Lucas-C/pre-commit-hooks
-  rev: v1.1.7
-  hooks:
-  - id: insert-license
-    files: .*\.(rb|tf.*|y[a]?ml)$
-    args:
-    - --license-filepath
-    - .license_header.txt
-- repo: https://github.com/antonbabenko/pre-commit-terraform
-  rev: v1.25.0
-  hooks:
-    - id: terraform_fmt
-    - id: terraform_docs
+source "https://rubygems.org/" do
+  gem "kitchen-terraform", "~> 4.9.0"
+end

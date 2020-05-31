@@ -1,0 +1,42 @@
+# Copyright 2020 NephoSolutions SRL, Sebastian Trebitz
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+version: 2
+jobs:
+  build:
+    docker:
+      - image: nephosolutions/terraform
+    steps:
+      - checkout
+      - run:
+          name: Decode and activate Google Cloud Platform service account credentials
+          command: |
+            mkdir -p ${HOME}/.config/gcloud
+            echo ${GOOGLE_SERVICE_ACCOUNT} | base64 -d > ${HOME}/.config/gcloud/application_default_credentials.json
+            gcloud auth activate-service-account --key-file ${HOME}/.config/gcloud/application_default_credentials.json
+      - run:
+          name: Install Test-Kitchen & Inspec
+          command: |
+            bundle install
+      - run:
+          name: Run inegration tests with Test-Kitchen-Terraform
+          command: |
+            bundle exec kitchen test --destroy=always
+
+workflows:
+  version: 2
+  test-kitchen:
+    jobs:
+      - build:
+          context: Test-Kitchen

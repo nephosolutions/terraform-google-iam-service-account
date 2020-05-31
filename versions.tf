@@ -1,4 +1,4 @@
-# Copyright 2019 NephoSolutions SPRL, Sebastian Trebitz
+# Copyright 2020 NephoSolutions SRL, Sebastian Trebitz
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 
 terraform {
   required_providers {
-    google = ">= 2.10"
+    google = ">= 3.5"
     random = ">= 2.0"
   }
   required_version = ">= 0.12.6"

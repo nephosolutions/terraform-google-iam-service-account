@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [3.1.0] - 2020-02-18
+
+- add service account description
+- allow service account ID to be specified
+- allow service account ID to be suffixed with random string
+
 ## [3.0.0] - 2019-09-18
 
 - use random service account ID
@@ -13,7 +19,8 @@ All notable changes to this project will be documented in this file.
 
 - Supported version of Terraform is 0.12
 
-[Unreleased]: https://github.com/nephosolutions/terraform-google-gcp-project/compare/v3.0.0...HEAD
+[Unreleased]: https://github.com/nephosolutions/terraform-google-gcp-project/compare/v3.1.0...HEAD
+[3.1.0]: https://github.com/nephosolutions/terraform-google-gcp-project/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/nephosolutions/terraform-google-gcp-project/compare/v2.0.0...v3.0.0
 [2.0.0]: https://github.com/nephosolutions/terraform-google-gcp-project/compare/v1.1.0...v2.0.0
 [1.1.0]: https://github.com/nephosolutions/terraform-google-gcp-project/compare/v1.0.0...v1.1.0
