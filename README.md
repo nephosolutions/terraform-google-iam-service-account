@@ -19,7 +19,7 @@ module "service_account" {
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.6 |
+| terraform | >= 0.12.26 |
 | google | >= 3.5 |
 | random | >= 2.0 |
 
